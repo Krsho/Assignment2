@@ -114,3 +114,21 @@ document.getElementById("calculate-distance").addEventListener("click", () => {
 });
 
 
+//Interactive Gallery
+document.addEventListener('DOMContentLoaded', function () {
+  const thumbnails = document.querySelectorAll('.card-thumbnail');
+
+  const modal = document.getElementById('cardModal');
+  const modalImg = modal.querySelector('.modal-body img');
+  const modalTitle = modal.querySelector('.modal-title');
+
+  thumbnails.forEach(function (thumbnail) {
+    thumbnail.addEventListener('click', function () {
+      const imgSrc = thumbnail.getAttribute('data-img');
+      const title = thumbnail.getAttribute('data-title');
+
+      modalImg.src = imgSrc;
+      modalTitle.textContent = title;
+    });
+  });
+});
