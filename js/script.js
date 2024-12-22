@@ -176,38 +176,63 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 
-  // Data-Driven Content
+  
+  // Data-Driven Content and Delete
   const cardContainer = document.getElementById('cardContainer');
+  let cards = []; 
 
-  fetch('data/content.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      data.forEach(card => {
-        const cardElement = document.createElement('div');
-        cardElement.classList.add('col-md-4', 'mb-4');
+fetch('data/content.json')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    cards = data;
+    renderCards();
+  })
+  .catch(error => {
+    cardContainer.innerHTML = `<p class="text-danger">Failed to load card data: ${error.message}</p>`;
+  });
 
-        cardElement.innerHTML = `
-          <div class="card">
-            <img src="${card.image}" class="card-img-top" alt="${card.name}">
-            <div class="card-body">
-              <h5 class="card-title">${card.name}</h5>
-              <p class="card-text">${card.description}</p>
-              <p class="card-text"><strong>Price:</strong> ${card.price}</p>
-            </div>
-          </div>
-        `;
+function renderCards() {
+  cardContainer.innerHTML = '';
+  cards.forEach((card, index) => {
+    const cardElement = document.createElement('div');
+    cardElement.classList.add('col-md-4', 'mb-4');
+    cardElement.innerHTML = `
+      <div class="card">
+        <img src="${card.image}" class="card-img-top" alt="${card.name}">
+        <div class="card-body">
+          <h5 class="card-title">${card.name}</h5>
+          <p class="card-text">${card.description}</p>
+          <p class="card-text"><strong>Price:</strong> ${card.price}</p>
+          <button class="btn btn-danger btn-sm delete-btn" data-index="${index}">Delete</button>
+        </div>
+      </div>
+    `;
+    cardContainer.appendChild(cardElement);
+  });
 
-        cardContainer.appendChild(cardElement);
-      });
-    })
-    .catch(error => {
-      cardContainer.innerHTML = `<p class="text-danger">Failed to load card data: ${error.message}</p>`;
-    });
+  addEventListeners(); 
+}
+
+function addEventListeners() {
+  const deleteButtons = document.querySelectorAll('.delete-btn');
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', handleDelete);
+  });
+}
+
+function handleDelete(event) {
+  const index = event.target.getAttribute('data-index');
+  if (confirm('Are you sure you want to delete this card?')) {
+    cards.splice(index, 1); 
+    renderCards();  
+  }
+}
+
 
     // Form Submission with AJAX
     $(document).ready(function() {
