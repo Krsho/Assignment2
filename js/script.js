@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
     placeholder.addEventListener("drop", drop);
   });
 
+
+  //Gallery
   document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal');
     const modalImage = document.getElementById('modal-image');
@@ -63,3 +65,57 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+
+// Toggle Show/Hide
+const toggleButton = document.getElementById('toggle-button');
+if (toggleButton) {
+  toggleButton.addEventListener('click', function () {
+    const section = document.getElementById('showhide');
+    if (section.style.display === 'none' || section.style.display === '') {
+      section.style.display = 'block';
+      this.textContent = 'Hide Tournament Info';
+    } else {
+      section.style.display = 'none';
+      this.textContent = 'Show Tournament Info';
+    }
+  });
+}
+
+// Toggle Show/Hide 2
+const toggleVideoButton = document.getElementById('toggle-video');
+if (toggleVideoButton) {
+  toggleVideoButton.addEventListener('click', function () {
+    const videoSection = document.getElementById('showhide2');
+    if (videoSection.style.display === 'none' || videoSection.style.display === '') {
+      videoSection.style.display = 'block';
+      this.textContent = 'Hide Video';
+    } else {
+      videoSection.style.display = 'none';
+      this.textContent = 'Show Video';
+    }
+  });
+}
+
+// Accordion
+const accordionBtnToggle = document.querySelectorAll(".accordion-card__header");
+for (i of accordionBtnToggle) {
+  i.addEventListener("click", accordionToggleFunction);
+}
+function accordionToggleFunction() {
+  this.nextElementSibling.classList.toggle("active");
+  this.children[0].classList.toggle("toggleIcon");
+}
+
+
+// Theme Toggle
+document.getElementById('toggle-dark-theme').addEventListener('click', function () {
+  document.body.classList.toggle('dark-theme');
+
+  if (document.body.classList.contains('dark-theme')) {
+      this.textContent = 'Switch to Light Theme';
+  } else {
+      this.textContent = 'Switch to Dark Theme';
+  }
+});
+
