@@ -256,6 +256,10 @@ section p {
   background-color: #f0e9e0;
 }
 
+#cardSec {
+  background-color: #f0e9e0;
+}
+
 #sec3 h5 {
   background-color: black;
   color: white;
@@ -325,10 +329,6 @@ section p {
   display: none;
 }
 
-#email-section {
-  background-color: #f0e9e0;
-}
-
 #tournament-info {
   margin-top: 90px;
 }
@@ -369,21 +369,19 @@ section p {
   border-color: #e9192d;
 }
 
-/* accordion card */
+/* Accordian */
 .accordion-card {
   width: 100%;
   border: solid #1c1c3a;
   background-color: white;
 }
 
-/* accordion header */
 .accordion-card__header {
   position: relative;
   padding: 10px;
   margin: 0;
 }
 
-/* icon */
 .icon {
   position: absolute;
   right: 10px;
@@ -394,7 +392,6 @@ section p {
     color 300ms;
 }
 
-/* accordion content */
 .accordion-card__content {
   border-top: solid 1px #1c1c3a;
   padding: 10px;
@@ -403,7 +400,6 @@ section p {
   margin: 0;
 }
 
-/* javascript css classes to be added and removed */
 .toggleIcon {
   transform: rotate(45deg);
   color: hsl(0, 70%, 50%);

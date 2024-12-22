@@ -1,0 +1,21 @@
+[
+    {
+      "name": "Fiendsmith Engraver",
+      "image": "images/engraver.jpg",
+      "price": "€67.25",
+      "description": "One of the most powerful engine pieces in the meta right now."
+    },
+    {
+      "name": "Fiendsmith's Tract",
+      "image": "images/tract.jpg",
+      "price": "€12.99",
+      "description": "The card you access Fiendsmith Engraver with."
+    },
+    {
+      "name": "Triple Tactics Thrust",
+      "image": "images/thrust.jpg",
+      "price": "€11.99",
+      "description": "A really good staple card in the current format, can be used in most decks."
+    }
+  ]
+  
