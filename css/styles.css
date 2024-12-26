@@ -10,6 +10,44 @@ html, body {
   /* overflow-x:hidden; */
 }
 
+/* DARK THEME */
+.dark-theme ,.dark-theme h5, .dark-theme h2, .dark-theme h1, .dark-theme #sec, .dark-theme h3, .dark-theme p{
+  background-color: #121212 !important; 
+  color: #ffffff !important; 
+}
+
+.dark-theme header h1, .dark-theme header p{
+  background-color: transparent !important; 
+}
+
+.dark-theme footer p{
+  background-color: transparent !important; 
+}
+
+.dark-theme #sec1 .card-body {
+  background-color: #121212;
+}
+
+.dark-theme #sec1 img {
+  background-color: #121212;
+}
+
+.dark-theme #sec1 #bruh {
+  background-color: #121212;
+}
+
+.dark-theme #sec2{
+  background-color: #121212;
+}
+
+.dark-theme #sec4{
+  background-color: #121212;
+}
+
+.dark-theme .cardbg{
+  background-color: #121212;
+}
+
 /* NAVBAR */
 nav {
   position: fixed;
@@ -218,6 +256,10 @@ section p {
   background-color: #f0e9e0;
 }
 
+#cardSec {
+  background-color: #f0e9e0;
+}
+
 #sec3 h5 {
   background-color: black;
   color: white;
@@ -279,6 +321,14 @@ section p {
   background-color: #f0e9e0;
 }
 
+#showhide {
+  display: none;
+}
+
+#showhide2 {
+  display: none;
+}
+
 #tournament-info {
   margin-top: 90px;
 }
@@ -295,6 +345,10 @@ section p {
   background-color: #e9192d;
 }
 
+#table {
+  background-color: #f0e9e0;
+}
+
 #form {
   background-color: #f0e9e0;
 }
@@ -305,6 +359,143 @@ section p {
 
 #table .table-bordered td {
   border: 2px solid black;
+}
+
+.thumbnail {
+  border: 5px solid #f0e9e0;
+  cursor: pointer;
+  object-fit: cover;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.thumbnail:hover {
+  transform: scale(1.05);
+  border-color: #e9192d;
+}
+
+/* Accordian */
+.accordion-card {
+  width: 100%;
+  border: solid #1c1c3a;
+  background-color: white;
+}
+
+.accordion-card__header {
+  position: relative;
+  padding: 10px;
+  margin: 0;
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  color: #e9192d;
+  transform: rotate(0deg);
+  transition:
+    transform 300ms,
+    color 300ms;
+}
+
+.accordion-card__content {
+  border-top: solid 1px #1c1c3a;
+  padding: 10px;
+  color: #3d3b3b;
+  display: none;
+  margin: 0;
+}
+
+.toggleIcon {
+  transform: rotate(45deg);
+  color: hsl(0, 70%, 50%);
+}
+
+.active {
+  display: block;
+}
+
+/* MODAL STYLES */
+#gallery .modal {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#gallery .modal-content {
+  margin: auto;
+  max-width: 20%;
+  display: block;
+}
+
+#gallery .close {
+  position: absolute;
+  top: 120px;
+  right: 705px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+#toggle-button {
+  display: block;
+  margin: 0 auto;
+  background-color: #e9192d;
+}
+
+#toggle-video {
+  display: block;
+  margin: 0 auto;
+  background-color: #e9192d;
+}
+
+
+/* TOAST */
+.toast {
+  background-color: #1c1c3a !important;
+  color: white !important;
+}
+
+.toast-success {
+  background-color: green !important;
+}
+
+.toast-error {
+  background-color: red !important;
+}
+
+/* EDIT/DELETE */
+
+#manage-tips {
+  background-color: #f4f4f4;
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+
+#tips-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+#tips-table, th, td {
+  border: 1px solid #ddd;
+  text-align: left;
+  padding: 8px;
+}
+
+#message {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.text-success {
+  color: green;
+}
+
+.text-danger {
+  color: red;
 }
 
 /* FOOTER */
