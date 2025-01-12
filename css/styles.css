@@ -49,6 +49,10 @@ html, body {
 }
 
 /* NAVBAR */
+.nav-link.active {;
+  color: #FFD700;
+}
+
 nav {
   position: fixed;
   left: 0;
