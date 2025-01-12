@@ -851,7 +851,7 @@ const routes = {
 </section>
 </main>
   `,
-  "login": `
+  login: `
         <section id="login-page" class="py-5">
   <div class="container text-center">
     <h2 class="mb-4">Log In</h2>
@@ -878,18 +878,103 @@ const routes = {
 };
 
 function renderRoute(route) {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  if (!isLoggedIn && route !== 'login') {
+    window.location.hash = 'login';
+    return;
+  }
+
   const appDiv = document.getElementById("app");
   appDiv.innerHTML = routes[route] || `<h1>404 - Page Not Found</h1>`;
+  if (route === 'login') {
+    addLoginFormEventListener();
+  }
 }
 
-//------------------
+// Handle Login Form Submission
+function addLoginFormEventListener() {
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('data/users.json'); 
+                const data = await response.json();
+                const users = data.users;
+
+                const user = users.find(user => user.username === username && user.password === password);
+
+                if (user) {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('username', user.username);
+
+                    window.location.hash = 'home';
+                } else {
+                    document.getElementById('loginMessage').style.display = 'block'; 
+                }
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        });
+    }
+}
+
+//Redirect if Not Logged In
+window.addEventListener('load', function () {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const username = localStorage.getItem('username');
+
+    if (!isLoggedIn) {
+        if (!window.location.hash.includes('login')) {
+            window.location.hash = 'login';
+        }
+    } else {
+        if (window.location.hash.includes('home')) {
+            const appDiv = document.getElementById('app');
+            if (appDiv) {
+                appDiv.innerHTML += `<h1 class="text-center mt-5">Hello, ${username}!</h1>`;
+            }
+        }
+    }
+});
+
+//Read Cookies
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+//Render Routes
+function renderRoute(route) {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn && route !== 'login') {
+        window.location.hash = 'login';
+        return;
+    }
+
+    const appDiv = document.getElementById('app');
+    appDiv.innerHTML = routes[route] || `<h1>404 - Page Not Found</h1>`;
+
+    if (route === 'login') {
+        addLoginFormEventListener();
+    }
+
+    if (route === 'home' && isLoggedIn) {
+        const username = localStorage.getItem('username');
+        appDiv.innerHTML += `<h1 class="text-center mt-5">Hello, ${username}!</h1>`;
+    }
+}
 
 
-//----------------
 
+//Navigation and Routing
 document.addEventListener('DOMContentLoaded', function () {
-  //Navigation and Routing
-  const navLinks = document.querySelectorAll(".nav-link");
+    const navLinks = document.querySelectorAll(".nav-link");
 
     navLinks.forEach(link => {
         link.addEventListener("click", e => {
@@ -921,6 +1006,11 @@ document.addEventListener('DOMContentLoaded', function () {
         renderRoute(route);
         highlightActiveLink(route);
     });
+
+    window.addEventListener('hashchange', () => {
+      const route = window.location.hash.slice(1);
+      renderRoute(route);
+  });
 
   // Dropdown
   const toggleBtn = document.querySelector('.toggle_btn');
@@ -1029,7 +1119,7 @@ document.addEventListener('DOMContentLoaded', function () {
    const tournamentForm = document.getElementById('tournamentForm');
    if (tournamentForm) {
     tournamentForm.addEventListener('submit', function (e) {
-        e.preventDefault();
+        e.preventDefault(); 
 
         let isValid = true;
         const fullName = document.getElementById('fullName');
